@@ -1,3 +1,4 @@
+using LiquidLabsDemo.ApiManager.Service;
 using LiquidLabsDemo.BL.DependencyServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpClient<IHttpService, HttpService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ExternalUrl:PostApiUrl"]?? "");
+});
+
 builder.Services.AddPostInfrastructureServices();
 var app = builder.Build();
 

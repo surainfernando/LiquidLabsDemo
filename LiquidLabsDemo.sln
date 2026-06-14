@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidLabsDemo.Repository",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidLabsDemo.DTO", "LiquidLabsDemo.DTO\LiquidLabsDemo.DTO.csproj", "{5106256E-9891-4369-B695-7109978BBCDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidLabsDemo.ApiManager", "LiquidLabsDemo.ApiManager\LiquidLabsDemo.ApiManager.csproj", "{63B45A07-D0C2-4167-98AD-F5EACD91BDE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5106256E-9891-4369-B695-7109978BBCDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5106256E-9891-4369-B695-7109978BBCDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5106256E-9891-4369-B695-7109978BBCDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63B45A07-D0C2-4167-98AD-F5EACD91BDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B45A07-D0C2-4167-98AD-F5EACD91BDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B45A07-D0C2-4167-98AD-F5EACD91BDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B45A07-D0C2-4167-98AD-F5EACD91BDE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

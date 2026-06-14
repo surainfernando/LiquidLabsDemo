@@ -10,7 +10,7 @@ namespace LiquidLabsDemo.BL.Posts
         {
             _iPostDataService = iPostDataService;
         }
-        public async Task<PostResponse> GetPostByIdAsync(int id, CancellationToken token)
+        public async Task<PostResponse?> GetPostByIdAsync(int id, CancellationToken token)
         {
            return await _iPostDataService.GetPostByIdAsync(id, token);
         }
