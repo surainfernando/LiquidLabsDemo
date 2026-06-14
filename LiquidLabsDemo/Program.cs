@@ -1,3 +1,4 @@
+using LiquidLabsDemo.API.Helpers;
 using LiquidLabsDemo.ApiManager.Service;
 using LiquidLabsDemo.BL.DependencyServices;
 
@@ -17,7 +18,7 @@ builder.Services.AddHttpClient<IHttpService, HttpService>(client =>
 
 builder.Services.AddPostInfrastructureServices();
 var app = builder.Build();
-
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
