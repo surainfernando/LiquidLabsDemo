@@ -25,12 +25,12 @@ namespace LiquidLabsDemo.ApiManager.Posts
                PropertyNameCaseInsensitive = true
              });
 
-            if (response == null) return null;
-
+            if (response == null||response.id==null) return null;
+            
             return new PostResponse()
             {
                 UserId=response.userId,
-                Id = response.id,
+                Id = (int)response.id,
                 Title = response.title,
                 Body=response.body
             };

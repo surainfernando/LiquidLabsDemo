@@ -15,7 +15,7 @@ namespace LiquidLabsDemo.API.Controllers
             _iPostRetrievalService = iPostRetrievalService;
 
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<PostResponse>> GetById(int id,CancellationToken token)
         {
            var response= await _iPostRetrievalService.GetPostByIdAsync(id, token);

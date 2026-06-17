@@ -1,6 +1,7 @@
 ﻿using LiquidLabsDemo.ApiManager.Posts;
 using LiquidLabsDemo.DTO.DTO.Post;
 using LiquidLabsDemo.Repository.Post;
+using entityModels = LiquidLabsDemo.Repository.DTO;
 
 namespace LiquidLabsDemo.Service.Post
 {
@@ -15,8 +16,32 @@ namespace LiquidLabsDemo.Service.Post
         }
         public async Task<PostResponse?> GetPostByIdAsync(int id, CancellationToken token)
         {
-            return await _iPostApiService.GetPostByIdAsync(id,token);
-            //return await _iPostRepositoryService.GetPostByIdAsync(id, token);
+            var postDBRecord=await _iPostRepositoryService.GetPostByIdAsync(id, token);
+            if (postDBRecord != null)
+            {
+                return new PostResponse()
+                {
+                    Id=postDBRecord.Id,
+                    UserId=postDBRecord.UserId,
+                    Body=postDBRecord.Body,
+                    Title=postDBRecord.Title
+                };
+            }
+            
+            var postFromAPIService=await _iPostApiService.GetPostByIdAsync(id,token);
+            if (postFromAPIService != null)
+            {
+                await _iPostRepositoryService.CreatePostAsync(new entityModels.Post()
+                {
+                    Id = postFromAPIService.Id,
+                    UserId = postFromAPIService.UserId,
+                    Body = postFromAPIService.Body,
+                    Title = postFromAPIService.Title
+                }, token);
+                return postFromAPIService;
+            }
+            return null;
+          
         }
     }
 }

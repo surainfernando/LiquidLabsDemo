@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\LiquidLabsDemo.DTO\LiquidLabsDemo.DTO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\" />
   </ItemGroup>
 
 </Project>
