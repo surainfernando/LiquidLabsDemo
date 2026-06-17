@@ -1,8 +1,11 @@
-﻿using LiquidLabsDemo.DTO.DTO.Post;
+﻿using LiquidLabsDemo.DTO.DTO.Common;
+using LiquidLabsDemo.DTO.DTO.Post;
 using LiquidLabsDemo.Repository.DBServices;
 using LiquidLabsDemo.Repository.DTO;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 using System.Data;
+using System.Reflection.PortableExecutable;
 using entityModels = LiquidLabsDemo.Repository.DTO;
 
 namespace LiquidLabsDemo.Repository.Post
@@ -49,10 +52,51 @@ namespace LiquidLabsDemo.Repository.Post
 
             await command.ExecuteNonQueryAsync();
         }
+        public async  Task<PaginationList<PostResponse>> GetPagintedPostsAsync(int pageSize, int pageNumber, CancellationToken token)
+        {
+            using var connection = _dbConnectionFactory.CreateConnection();
+            await connection.OpenAsync();
+            using var command = new SqlCommand(@"
+                                                SELECT
+                                                p.UserId,
+                                                p.Id,
+                                                p.Title,
+                                                p.Body,
+                                                COUNT(*) OVER() AS TotalCount
+                                                FROM Post p
+                                                ORDER BY p.Id
+                                                OFFSET @Offset ROWS
+                                                FETCH NEXT @PageSize ROWS ONLY;"
+                                                , connection);
+
+            command.Parameters.AddWithValue("@Offset", (pageNumber - 1)* pageSize);
+            command.Parameters.AddWithValue("@PageSize", pageSize);
+
+            List<PostResponse> list = new();
+            using var reader = await command.ExecuteReaderAsync();
+            int RowCount = 0;
+            while (await reader.ReadAsync())
+            {
+                list.Add(new PostResponse
+                {
+                   
+                    UserId = reader.IsDBNull(0) ? null : reader.GetInt32(0),
+                    Id = reader.GetInt32(1),
+                    Title = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Body = reader.IsDBNull(3) ? null : reader.GetString(3)
+                });
+                RowCount = reader.GetInt32(4);
+            }
+
+            var model = new PaginationList<PostResponse>()
+            {
+                List=list,
+                PageNumber=pageNumber,
+                PageSize=pageSize
+            };
+
+            return model;
+        }
     }
-    public class Car1
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+    
     }
-}

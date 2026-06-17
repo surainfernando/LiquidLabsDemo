@@ -9,10 +9,11 @@ A unique constraint was added to Id column, as in the api from which data is ret
 Create table dbo.Post(
 InternalId int IDENTITY(1,1),
 UserId int null,
-Id int Unique null,
+Id int Unique,
 Title varchar(1000)  null,
 Body varchar(1000)  null,
 )
+
 
 CREATE INDEX IX_Post_Id
 ON dbo.Post (Id);

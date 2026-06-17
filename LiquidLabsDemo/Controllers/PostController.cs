@@ -1,4 +1,5 @@
 ﻿using LiquidLabsDemo.BL.Posts;
+using LiquidLabsDemo.DTO.DTO.Common;
 using LiquidLabsDemo.DTO.DTO.Post;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,12 @@ namespace LiquidLabsDemo.API.Controllers
                 return NotFound();
             }
             return Ok(response);
+        }
+
+        [HttpGet("GetList")]
+        public async Task<ActionResult<PaginationList<PostResponse>>> GetPaginatedList(int pageSize,int pageNumber, CancellationToken token)
+        {
+            return Ok(await _iPostRetrievalService.GetPagintedPostsAsync(pageSize, pageNumber, token));
         }
     }
 }

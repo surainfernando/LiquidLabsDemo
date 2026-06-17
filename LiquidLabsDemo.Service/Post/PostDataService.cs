@@ -1,4 +1,5 @@
 ﻿using LiquidLabsDemo.ApiManager.Posts;
+using LiquidLabsDemo.DTO.DTO.Common;
 using LiquidLabsDemo.DTO.DTO.Post;
 using LiquidLabsDemo.Repository.Post;
 using entityModels = LiquidLabsDemo.Repository.DTO;
@@ -42,6 +43,11 @@ namespace LiquidLabsDemo.Service.Post
             }
             return null;
           
+        }
+
+        public async Task<PaginationList<PostResponse>> GetPagintedPostsAsync(int pageSize, int pageNumber, CancellationToken token)
+        {
+            return await _iPostRepositoryService.GetPagintedPostsAsync(pageSize, pageNumber, token);
         }
     }
 }
