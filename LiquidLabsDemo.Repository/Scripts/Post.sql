@@ -6,6 +6,9 @@ InternalId was used as primary key for local storage.
 A unique constraint was added to Id column, as in the api from which data is retireved , Posts are uniquely identified by Id  column.
 **/
 
+create database LiquidLabsDemo
+use LiquidLabsDemo;
+
 Create table dbo.Post(
 InternalId int IDENTITY(1,1),
 UserId int null,
