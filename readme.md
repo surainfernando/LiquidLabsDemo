@@ -4,7 +4,8 @@ The flowof the application is described in ## Endpoints
 
 ## Running Project
 The Project can be run by configuring the startup project to LiquidLabsDemo.API
-Further the ConnectionStrings.DefaultConnection should be set matching the local db configuration. Please set Login credentilas, Server Ip and Database name
+Further the ConnectionStrings.DefaultConnection should be set matching the local db configuration. 
+Please set Login credentilas, Server Ip and Database name in appsettings.json and appsettings.development.json files.
 Further the Post.sql script needs to be executed to crate the database and tables necessary for this project.
 
 ## Endpoints
